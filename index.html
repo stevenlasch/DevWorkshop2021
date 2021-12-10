@@ -12,12 +12,12 @@
 <body>
     <h1 class='headerText'>GitHub Avatar Viewer</h1>
     <div class="text-center">
-        <input type="text" id="usernametext" size=30 placeholder="Username">
+        <input type="text" id="usernametext" size=30 placeholder="Username" onkeydown="check_enter()">
         <input type="button" class="btn btn-primary lookupBtn" value="Add Profile" onclick="add_profile()">
     </div>
     <br/><br/>
 
-    <div class="container" id="container"></div>
+    <div class="container-fluid" id="container"></div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 

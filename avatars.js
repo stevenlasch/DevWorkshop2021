@@ -72,4 +72,10 @@ async function delete_profile(id) {
     }
 }
 
+function check_enter() {
+    if(event.key === 'Enter') {
+        add_profile();
+    }
+}
+
 list_users();

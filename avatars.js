@@ -1,14 +1,15 @@
 
-async function username_lookup() {
+async function add_profile() {
     try {
         let formData = new FormData();
         formData.append('username', document.getElementById("usernametext").value);
 
-        const response = await fetch('/github_profile.php',
+        const response = await fetch('/add_github_profile.php',
                 {method: "POST", body: formData});
 
         if (response.ok) {
             let textResponse = await response.text();
+            document.getElementById("usernametext").value = "";
             console.log("Username lookup request sent.");
             list_users();
             return;
@@ -29,6 +30,7 @@ async function list_users() {
 
             for (var i = usersJson.length - 1; i >= 0; i--) {
                 user = usersJson[i];
+                const d = new Date(user['created_at']);
 
                 data += '<div class="avatar">'
                 + '<div class="content">'
@@ -36,7 +38,9 @@ async function list_users() {
                 + '<div><span>Name:</span>' + user['name'] + '</div>'
                 + '<div class="image"><img src="' + user['avatar_url'] + '" /></div>'
                 + '</div>'
-                + '<div class="created"><span>Created:</span>' + user['created_at'] + '</div>'
+                + '<div class="created"><span>Created:</span>' + d.getFullYear() + '</div>'
+                + '<button type="button" class="close" aria-label="Close" onclick="delete_profile(' 
+                + user['ID'] + ')"><span aria-hidden="true">&times;</span></button>'
                 + '</div>';
             }
 
@@ -46,6 +50,25 @@ async function list_users() {
         }
     } catch {
         console.log("Error users list!");
+    }
+}
+
+async function delete_profile(id) {
+        try {
+        let formData = new FormData();
+        formData.append('ID', id);
+
+        const response = await fetch('/delete_github_profile.php',
+                {method: "POST", body: formData});
+
+        if (response.ok) {
+            let textResponse = await response.text();
+            console.log("Username delete request sent.");
+            list_users();
+            return;
+        }
+    } catch {
+        console.log("Error sending username delete request!");
     }
 }
 

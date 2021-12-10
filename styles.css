@@ -18,7 +18,7 @@ body {
     position: relative;
 }
 .container img {
-    width : 60%;
+    width : 80%;
 }
 .image {
     padding: 10px;
@@ -40,10 +40,17 @@ body {
     margin-top: 10px;
     text-align:center;
 }
-.lookupBtn{
-    margin-top: 10px;
-}
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+.avatar button {
+    position: absolute; 
+    top: 0;
+    right: 5px;
+}
+#usernametext {
+    text-align : center !important;
+    line-height : 2em !important;
+    font-size : 1rem !important; 
 }

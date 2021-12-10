@@ -24,19 +24,24 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $res = curl_exec($ch);
     curl_close($ch);
-    
+
     if($res === false)
     {
         exit();
     }
 
     $jsonres = json_decode($res, true);
-
-    $db = new PDO("sqlite:$dbFile");
     $login_var = $jsonres['login'];
     $name_var = $jsonres['name'];
     $avatar_url_var = $jsonres['avatar_url'];
     $created_at_var = $jsonres['created_at'];
+
+    if(!$login_var)
+    {
+        exit();
+    }
+
+    $db = new PDO("sqlite:$dbFile");
     $sql = "INSERT INTO users (login, name, avatar_url, created_at) VALUES ('$login_var', '$name_var', '$avatar_url_var', '$created_at_var')";
     $db->exec($sql);
 ?>
